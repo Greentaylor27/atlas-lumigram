@@ -1,9 +1,26 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
+import { FlashList } from '@shopify/flash-list';
+import { homeFeed } from "@/placeholder";
+
+const screenWidth = Dimensions.get('window').width;
 
 export default function Home() {
   return (
       <View style={styles.container}>
         {/* This is where the images goes */}
+        <FlashList
+          data={homeFeed}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <Image
+              source={{ uri: item.image }}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          )}
+          estimatedItemSize={200}
+          contentContainerStyle={styles.listContent}
+        />
       </View>
   )
 }
@@ -11,21 +28,14 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
-  headerBox: {
-    flex: 1,
-    width: '100%',
-    paddingHorizontal: 16,
-    paddingTop: 32,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  listContent: {
+    paddingVertical: 8,
   },
-  headerText: {
-    fontSize: 20,
-  },
-  imageElement: {
-    borderRadius: 5,
+  image: {
+    borderRadius: 15,
+    maxWidth: screenWidth,
+    height: 400,
+    marginVertical: 4,
   }
 })

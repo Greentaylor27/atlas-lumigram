@@ -49,12 +49,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerBox: {
-    flex: 1,
     width: '100%',
     paddingHorizontal: 16,
     paddingTop: 32,
+    paddingBottom: 12,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headerText: {
     fontSize: 20,
