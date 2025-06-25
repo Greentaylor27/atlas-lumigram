@@ -11,7 +11,7 @@ export default function Index() {
       <Image
         source={require('../assets/images/logo.png')}
         style={styles.image}/>
-      <Text style={styles.headerText}>Login</Text>
+      <Text style={styles.headerText}>Register</Text>
       <TextInput
         style={[styles.inputBox, { marginTop: '5%', marginBottom: 8, paddingLeft: 16 }]}
         onChangeText={setEmail}
@@ -37,15 +37,15 @@ export default function Index() {
           }
         }}
       >
-        <Text style={styles.buttonText}>Sign in</Text>
+        <Text style={styles.buttonText}>Create Account</Text>
       </Pressable>
       <Pressable
         style={styles.registerButton}
         onPress={() => {
-          router.replace('/RegisterPage');
+            router.replace('/');
         }}
       >
-        <Text style={styles.buttonText}>Create a new account</Text>
+        <Text style={styles.buttonText}>Login to exsisting account</Text>
       </Pressable>
     </View>
   );
