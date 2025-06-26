@@ -1,9 +1,9 @@
 import { Tabs, usePathname } from 'expo-router';
-import AntDesign from '@expo/vector-icons/AntDesign';
 import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
+import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
 
-export default function TabLayout() {
+function CustomeHeader() {
   const pathname = usePathname();
   const route = pathname.split('/').pop();
 
@@ -16,17 +16,23 @@ export default function TabLayout() {
   const headerTitle = titles[route || ''] || '';
 
   return (
-    <View style={{ flex: 1 }}>
-      {/* Custom Header */}
-      <View style={styles.headerBox}>
-        <Text style={styles.headerText}>{headerTitle}</Text>
-        <Pressable
-          style={{ padding: 6 }}
-          onPress={() => Alert.alert('You are logging out!')}
-        >
-          <Entypo name="log-out" size={20} color="#1DD2AF" />
-        </Pressable>
-      </View>
+    <View style={styles.headerBox}>
+      <Text style={styles.headerText}>{headerTitle}</Text>
+      <Pressable
+        style={{ padding: 6 }}
+        onPress={() => Alert.alert('You are logging out!')}
+      >
+        <Entypo name="log-out" size={24} color="#1DD2AF" />
+      </Pressable>
+    </View>
+  );
+}
+
+
+export default function TabLayout() {
+  return (
+    <>
+      <CustomeHeader />
       <Tabs screenOptions={{ headerShown: false }}>
         <Tabs.Screen
           name='Home'
@@ -37,17 +43,24 @@ export default function TabLayout() {
             )
           }}
         />
+        <Tabs.Screen
+          name="Add"
+          options={{
+            tabBarIcon: () => <AntDesign name="plus" size={24} color='black' />
+          }}
+        />
+        <Tabs.Screen
+          name="Favorites"
+          options={{
+            tabBarIcon: () => <AntDesign name="heart" size={24} color='black' />
+          }}
+        />
       </Tabs>
-    </View>
-  )
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   headerBox: {
     width: '100%',
     paddingHorizontal: 16,
