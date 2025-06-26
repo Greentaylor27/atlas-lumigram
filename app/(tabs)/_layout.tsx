@@ -1,4 +1,4 @@
-import { Tabs, usePathname } from 'expo-router';
+import { router, Tabs, usePathname } from 'expo-router';
 import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -20,7 +20,10 @@ function CustomeHeader() {
       <Text style={styles.headerText}>{headerTitle}</Text>
       <Pressable
         style={{ padding: 6 }}
-        onPress={() => Alert.alert('You are logging out!')}
+        onPress={() => {
+          Alert.alert('You are logged out!');
+          router.replace("/");
+        }}
       >
         <Entypo name="log-out" size={24} color="#1DD2AF" />
       </Pressable>
