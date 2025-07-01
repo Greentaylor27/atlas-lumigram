@@ -1,10 +1,21 @@
 import { Text, View, StyleSheet, TextInput, Image, Pressable, Alert } from "react-native";
 import React, { useState } from "react";
 import { router } from "expo-router";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function Index() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const auth = useAuth();
+
+  async function login() {
+    try {
+      await auth.login(email, password);
+      router.replace('/(tabs)/Home');
+    } catch (err) {
+      Alert.alert("Email or Password is incorrect");
+    }
+  }
 
   return (
     <View style={styles.wholeScreen}>
@@ -33,7 +44,7 @@ export default function Index() {
           if (!email && !password || !email || !password) {
             Alert.alert("Please provide Email and/or Password");
           } else {
-            router.push("/(tabs)/Home");
+            login();
           }
         }}
       >

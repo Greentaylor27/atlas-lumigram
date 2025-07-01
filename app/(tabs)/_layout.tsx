@@ -20,7 +20,6 @@ function CustomeHeader() {
   async function logout() {
     await auth.logout();
     router.replace("/");
-
   }
 
   return (
