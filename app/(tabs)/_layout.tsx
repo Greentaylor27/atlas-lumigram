@@ -2,10 +2,12 @@ import { router, Tabs, usePathname } from 'expo-router';
 import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
+import { useAuth } from '@/components/AuthProvider';
 
 function CustomeHeader() {
   const pathname = usePathname();
   const route = pathname.split('/').pop();
+  const auth = useAuth();
 
   const titles: Record<string, string> = {
     Home: 'Home Feed',
@@ -15,15 +17,18 @@ function CustomeHeader() {
 
   const headerTitle = titles[route || ''] || '';
 
+  async function logout() {
+    await auth.logout();
+    router.replace("/");
+
+  }
+
   return (
     <View style={styles.headerBox}>
       <Text style={styles.headerText}>{headerTitle}</Text>
       <Pressable
         style={{ padding: 6 }}
-        onPress={() => {
-          Alert.alert('You are logged out!');
-          router.replace("/");
-        }}
+        onPress={logout}
       >
         <Entypo name="log-out" size={24} color="#1DD2AF" />
       </Pressable>
