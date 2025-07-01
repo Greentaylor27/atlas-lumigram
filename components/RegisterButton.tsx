@@ -2,13 +2,21 @@ import { router } from "expo-router";
 import { StyleSheet, Pressable } from "react-native";
 import ButtonText from "./ButtonText";
 
-export default function RegisterButton() {
+export default function RegisterButton({ action }: { action: "login" | "register"}) {
+  function handlepress() {
+    if (action === "login") {
+      router.replace("/RegisterPage");
+    } else {
+      router.replace('/');
+    }
+  }
+  
   return (
     <Pressable
       style={styles.registerButton}
-      onPress={() => router.replace('/RegisterPage')}
+      onPress={handlepress}
     >
-      <ButtonText text="Create a new account" />
+      <ButtonText text={action === "login" ? "Create a new account": "Login to exsisting account"} />
     </Pressable>
   )
 }

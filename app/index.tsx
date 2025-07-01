@@ -17,8 +17,8 @@ export default function Index() {
       <Header text="Login"/>
       <EmailInput email={email} setEmail={setEmail} />
       <PasswordInput password={password} setPassword={setPassword} />
-      <SignInButton email={email} password={password} />
-      <RegisterButton />
+      <SignInButton email={email} password={password} action="login" />
+      <RegisterButton action="login" />
     </View>
   );
 }

@@ -3,30 +3,56 @@ import ButtonText from "@/components/ButtonText";
 import { useAuth } from "./AuthProvider";
 import { router } from "expo-router";
 
-export default function SignInButton({ email, password}: { email: string, password: string }) {
+type SignInButtonProps = {
+  email: string;
+  password: string;
+  action: "login" | "register"
+}
+
+export default function SignInButton({ email, password, action }: SignInButtonProps) {
   const auth = useAuth();
 
-    async function login() {
+  async function login() {
+    try {
+      await auth.login(email, password);
+    } catch (err) {
+      Alert.alert("Email or Password is incorrect");
+    }
+  }
+
+  async function register() {
+    try {
+      await auth.register(email, password);
+    } catch (err) {
+      Alert.alert("Unable to create account");
+    }
+  }
+
+    async function handlepress() {
+      if (!email || !password) {
+        Alert.alert("Please provide Email and/or Password");
+        return;
+      }
+
       try {
-        await auth.login(email, password);
-        router.replace('/(tabs)/Home');
+        if (action === "login") {
+          await login();
+        } else {
+          await register();
+        }
+        router.replace("/Home");
+
       } catch (err) {
-        Alert.alert("Email or Password is incorrect");
+        Alert.alert(action === "login" ? "LEmail or Password is incorrect" : "Unable to create account")
       }
     }
 
   return (
     <Pressable
       style={[styles.signinButton, { marginBottom: '2%' }]}
-      onPress={() => {
-        if (!email && !password || !email || !password) {
-          Alert.alert("Please provide Email and/or Password");
-        } else {
-          login();
-        }
-      }}
+      onPress={handlepress}
     >
-      <ButtonText text="Sign in" />
+      <ButtonText text={action === "login" ? "Sign in": "Create account"} />
     </Pressable>
   )
 }
