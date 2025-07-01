@@ -1,10 +1,22 @@
 import { Text, View, StyleSheet, TextInput, Image, Pressable, Alert } from "react-native";
 import React, { useState } from "react";
 import { router } from "expo-router";
+import { useAuth } from "@/components/AuthProvider";
 
 export default function Index() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const auth = useAuth();
+
+  async function register() {
+    Alert.alert(`Creating account using ${email} and ${password}`);
+    try{
+      await auth.register(email, password);
+      router.replace('/Home');
+    } catch (err) {
+      Alert.alert("Unable to create account");
+    }
+  }
 
   return (
     <View style={styles.wholeScreen}>
@@ -33,7 +45,7 @@ export default function Index() {
           if (!email && !password || !email || !password) {
             Alert.alert("Please provide Email and/or Password");
           } else {
-            router.push("/(tabs)/Home");
+            register();
           }
         }}
       >
@@ -41,9 +53,7 @@ export default function Index() {
       </Pressable>
       <Pressable
         style={styles.registerButton}
-        onPress={() => {
-            router.replace('/');
-        }}
+        onPress={() => register()}
       >
         <Text style={styles.buttonText}>Login to exsisting account</Text>
       </Pressable>
