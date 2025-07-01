@@ -53,7 +53,7 @@ export default function Index() {
       </Pressable>
       <Pressable
         style={styles.registerButton}
-        onPress={() => register()}
+        onPress={() => router.replace('/')}
       >
         <Text style={styles.buttonText}>Login to exsisting account</Text>
       </Pressable>
