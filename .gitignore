@@ -37,3 +37,6 @@ yarn-error.*
 
 app-example
 firebaseConfig.ts
+
+# Made a testing page to test layout/features
+app/(tabs)/Testing.tsx

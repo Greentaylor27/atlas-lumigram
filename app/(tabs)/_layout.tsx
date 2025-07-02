@@ -2,6 +2,7 @@ import { router, Tabs, usePathname } from 'expo-router';
 import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useAuth } from '@/components/AuthProvider';
 
 function CustomHeader() {
@@ -13,6 +14,7 @@ function CustomHeader() {
     Home: 'Home Feed',
     Add: 'Add Post',
     Favorites: 'Favorites',
+    Testing: 'Testing',
   };
 
   const headerTitle = titles[route || ''] || '';
@@ -81,3 +83,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 })
+
+{/*
+  <Tabs.Screen
+    name="Testing"
+    options={{
+      tabBarIcon: () => <Ionicons name='construct-sharp' size={24} color='black' />
+    }}
+  />
+*/}
