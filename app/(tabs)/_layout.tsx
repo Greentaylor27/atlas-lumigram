@@ -4,7 +4,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
 import { useAuth } from '@/components/AuthProvider';
 
-function CustomeHeader() {
+function CustomHeader() {
   const pathname = usePathname();
   const route = pathname.split('/').pop();
   const auth = useAuth();
@@ -39,7 +39,7 @@ function CustomeHeader() {
 export default function TabLayout() {
   return (
     <>
-      <CustomeHeader />
+      <CustomHeader />
       <Tabs screenOptions={{ headerShown: false }}>
         <Tabs.Screen
           name='Home'
