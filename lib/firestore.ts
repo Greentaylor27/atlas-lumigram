@@ -1,7 +1,7 @@
 import { db } from "@/firebaseConfig";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 
-type Post = {
+export type Post = {
   caption: string;
   image: string;
   createdAt: Date;
@@ -19,15 +19,16 @@ async function getPost() {
   const data = result.docs.map((doc) => {
     const postData = doc.data();
 
-    console.log("Raw postData: ", postData);
-    console.log("Raw postData created at: ", postData.createdAt);
+    // console.log("Raw postData: ", postData);
+    // console.log("Raw postData created at: ", postData.createdAt);
 
     return {
       ...postData,
-    };
+      createdAt: postData.createdAt?.toDate?.() ?? new Date(0),
+    } as Post;
   });
 
-  console.log("Final data array: ", data);
+  // console.log("Final data array: ", data);
   return data;
 }
 
