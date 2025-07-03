@@ -1,27 +1,9 @@
 import { View, StyleSheet, Image, Dimensions } from "react-native";
 import { FlashList } from '@shopify/flash-list';
-import { homeFeed } from "@/placeholder";
-import firestore from "@/lib/firestore";
-import type { Post } from "@/lib/firestore";
-import { useEffect, useState } from "react";
-
-
-const screenWidth = Dimensions.get('window').width;
+import { useHomeFeed } from "@/hooks/useHomeFeed";
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const fetchedPosts = await firestore.getPost();
-        const sorted = fetchedPosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
-        setPosts(sorted);
-      } catch (err) {
-        console.error("Failled to fetch posts:", err);
-      }
-    })();
-  }, []);
+  const { posts, refreshing, handleRefresh } = useHomeFeed();
 
   return (
       <View style={styles.container}>
@@ -38,6 +20,8 @@ export default function Home() {
           )}
           estimatedItemSize={200}
           contentContainerStyle={styles.listContent}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
         />
       </View>
   )
