@@ -1,8 +1,8 @@
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { router, Tabs, usePathname } from 'expo-router';
-import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { useAuth } from '@/components/AuthProvider';
 
 function CustomHeader() {
@@ -27,10 +27,7 @@ function CustomHeader() {
   return (
     <View style={styles.headerBox}>
       <Text style={styles.headerText}>{headerTitle}</Text>
-      <Pressable
-        style={{ padding: 6 }}
-        onPress={logout}
-      >
+      <Pressable style={{ padding: 6 }} onPress={logout}>
         <Entypo name="log-out" size={24} color="#1DD2AF" />
       </Pressable>
     </View>
@@ -40,7 +37,7 @@ function CustomHeader() {
 
 export default function TabLayout() {
   return (
-    <>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <CustomHeader />
       <Tabs screenOptions={{ headerShown: false }}>
         <Tabs.Screen
@@ -65,7 +62,7 @@ export default function TabLayout() {
           }}
         />
       </Tabs>
-    </>
+    </GestureHandlerRootView>
   );
 }
 
@@ -84,11 +81,3 @@ const styles = StyleSheet.create({
   },
 })
 
-{/*
-  <Tabs.Screen
-    name="Testing"
-    options={{
-      tabBarIcon: () => <Ionicons name='construct-sharp' size={24} color='black' />
-    }}
-  />
-*/}

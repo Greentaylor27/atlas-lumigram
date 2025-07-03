@@ -9,6 +9,7 @@ export type Post = {
 }
 
 const posts = collection(db, "posts");
+const favorites = collection(db, "favorites");
 
 async function addPost(post: Post) {
   await addDoc(posts, post);
@@ -32,7 +33,20 @@ async function getPost() {
   return data;
 }
 
+async function addToFavorite(post: Post, userId: string) {
+  try {
+    await addDoc(favorites, {
+      ...post,
+      favoritedBy: userId,
+    });
+    console.log(`Post added to favorites by user ${userId}`);
+  } catch (err) {
+    console.error("Failed to add to favorites:", err);
+  }
+}
+
 export default {
   addPost,
   getPost,
+  addToFavorite,
 }

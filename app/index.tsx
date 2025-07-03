@@ -12,14 +12,14 @@ export default function Index() {
   const [password, setPassword] = useState('');
 
   return (
-    <View style={styles.wholeScreen}>
-      <Logo />
-      <Header text="Login"/>
-      <EmailInput email={email} setEmail={setEmail} />
-      <PasswordInput password={password} setPassword={setPassword} />
-      <SignInButton email={email} password={password} action="login" />
-      <RegisterButton action="login" />
-    </View>
+      <View style={styles.wholeScreen}>
+        <Logo />
+        <Header text="Login"/>
+        <EmailInput email={email} setEmail={setEmail} />
+        <PasswordInput password={password} setPassword={setPassword} />
+        <SignInButton email={email} password={password} action="login" />
+        <RegisterButton action="login" />
+      </View>
   );
 }
 
